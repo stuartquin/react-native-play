@@ -35,7 +35,7 @@ var styles = StyleSheet.create({
   }
 });
 
-class MovieDetail extends React.Component {
+export default class MovieDetail extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -64,5 +64,3 @@ class MovieDetail extends React.Component {
     );
   }
 }
-
-export default MovieDetail;
