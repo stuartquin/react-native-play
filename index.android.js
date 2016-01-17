@@ -1,6 +1,6 @@
 'use strict';
 
 import React from 'react-native';
-import MovieListApp from './src/movielistapp';
+import SoItGoesApp from './src/soitgoesapp';
 
-React.AppRegistry.registerComponent('AwesomeProject', () => MovieListApp);
+React.AppRegistry.registerComponent('AwesomeProject', () => SoItGoesApp);
