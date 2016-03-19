@@ -4,11 +4,9 @@ import React, { Component } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
-import LandingScreen from './containers/landing';
-import ThoughtsContainer from './containers/thoughts';
+import CalculationContainer from './containers/calculation';
 
 import reducer from './reducer';
-
 
 var {
   AppRegistry,
@@ -43,7 +41,7 @@ var NavigationBarRouteMapper = {
     return (
       <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
         <Text style={{color: 'white', margin: 10, fontSize: 16}}>
-          SoItGoes
+          Much Tax
         </Text>
       </TouchableOpacity>
     );
@@ -59,7 +57,7 @@ export default class SoItGoesApp extends React.Component {
         <Navigator
           initialRoute={{
             name: 'Landing',
-            component: ThoughtsContainer,
+            component: CalculationContainer,
             index: 0,
           }}
           navigationBar={

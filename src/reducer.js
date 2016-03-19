@@ -1,24 +1,49 @@
 'use strict';
+
 import {Map, List} from 'immutable';
 
-const fetchTags = (prefix, tags) => {
-  if (prefix) {
-    return tags.filter(t => t.startsWith(prefix)); 
-  }
-  return List();
+const BASIC = 10600;
+const BANDS = List([
+  Map({
+    start: 0,
+    end: 31865,
+    rate: 20.0
+  }),
+  Map({
+    start: 31866,
+    end: 150000,
+    rate: 40.0
+  })
+]);
+const ADDITIONAL = 45;
+
+const computeSummary = (salary) => {
+  const results = Map({
+    salary: salary,
+    allowance: BASIC,
+    taxable: salary - BASIC
+  });
+  results.set('bands', BANDS.map((band) => {
+    const start = band.get('start');
+    const end = band.get('end');
+    const amount = Math.min(results.get('taxable') - start, end - start);
+    return (amount / 100.0) * band.get('rate');
+  }));
+
+  return results;
 };
 
 export default function(state = Map(), action) {
   switch(action.type) {
-    case 'ADD_THOUGHT':
-      return state.set('thoughts', state.get('thoughts').concat([action.value]));
-    case 'SUGGEST_TAGS':
-      return state.set('suggestedTags', fetchTags(action.value, state.get('existingTags')));
+    case 'SET_SALARY':
+      return state.merge({
+        salary: action.value,
+        summary: computeSummary(action.value)
+      });
   }
 
   return Map({
-    thoughts: List(),
-    existingTags: List(['hello', 'help', 'contact', 'note', 'cool', 'reminder']),
-    suggestedTags: List(),
+    salary: null,
+    summary: Map({})
   });
 }
