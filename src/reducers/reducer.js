@@ -1,5 +1,7 @@
 'use strict';
 
+import {Map} from 'immutable';
+import {computeSummary} from '../lib/calculations';
 
 export default function(state = Map(), action) {
   switch(action.type) {

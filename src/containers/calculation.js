@@ -34,8 +34,12 @@ const TaxBands = ({
   if (!bands) {
     return (<View></View>);
   }
+  const totalTax = taxDue.reduce((x, y) => x + y);
   return (
     <View>
+      <Text>
+        Total : {totalTax}
+      </Text>
       {bands.keySeq().map(index => {
         const info = bands.get(index);
         const tax = taxDue.get(index);
