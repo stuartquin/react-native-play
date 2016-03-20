@@ -27,6 +27,28 @@ const SalaryInput = ({
   );
 };
 
+const TaxBands = ({
+  bands,
+  taxDue
+}) => {
+  if (!bands) {
+    return (<View></View>);
+  }
+  return (
+    <View>
+      {bands.keySeq().map(index => {
+        const info = bands.get(index);
+        const tax = taxDue.get(index);
+        return (
+        <Text key={index}>
+          {info.get('rate')}% : {tax}
+        </Text>
+        );
+      })}
+    </View>
+  );
+};
+
 const Summary = ({
   results
 }) => {
@@ -34,6 +56,7 @@ const Summary = ({
     <View>
       <Text>Gross: {results.get('salary')}</Text>
       <Text>Taxable: {results.get('taxable')}</Text>
+      <TaxBands bands={results.get('bands')} taxDue={results.get('taxDue')}/>
     </View>
   );
 };
